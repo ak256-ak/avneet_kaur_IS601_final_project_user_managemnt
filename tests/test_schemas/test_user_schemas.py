@@ -43,15 +43,14 @@ def user_response_data(user_base_data):
         "last_name": user_base_data["last_name"],
         "role": user_base_data["role"],
         "email": user_base_data["email"],
-        # "last_login_at": datetime.now(),
-        # "created_at": datetime.now(),
-        # "updated_at": datetime.now(),
         "links": []
     }
 
 @pytest.fixture
 def login_request_data():
     return {"email": "john_doe_123@emai.com", "password": "SecurePassword123!"}
+
+
 
 # Tests for UserBase
 def test_user_base_valid(user_base_data):
@@ -75,7 +74,6 @@ def test_user_update_valid(user_update_data):
 def test_user_response_valid(user_response_data):
     user = UserResponse(**user_response_data)
     assert user.id == user_response_data["id"]
-    # assert user.last_login_at == user_response_data["last_login_at"]
 
 # Tests for LoginRequest
 def test_login_request_valid(login_request_data):
@@ -108,3 +106,27 @@ def test_user_base_url_invalid(url, user_base_data):
     user_base_data["profile_picture_url"] = url
     with pytest.raises(ValidationError):
         UserBase(**user_base_data)
+
+
+
+# Test invalid email format for UserCreate
+def test_user_create_invalid_email(user_create_data):
+    user_create_data["email"] = "invalid-email"
+    with pytest.raises(ValidationError) as e:
+        UserCreate(**user_create_data)
+    assert "value is not a valid email address" in str(e.value)
+
+# Test invalid role for UserCreate
+def test_user_create_invalid_role(user_create_data):
+    user_create_data["role"] = "INVALID_ROLE"  # Invalid role
+    with pytest.raises(ValidationError) as e:
+        UserCreate(**user_create_data)
+    assert "value is not a valid enumeration member" in str(e.value)
+
+# Test missing required fields for UserCreate
+def test_user_create_missing_fields(user_create_data):
+    user_create_data.pop("email")  # Remove the required email field
+    with pytest.raises(ValidationError) as e:
+        UserCreate(**user_create_data)
+    assert "field required" in str(e.value)
+
