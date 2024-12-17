@@ -1,7 +1,10 @@
 from builtins import ValueError, any, bool, str
 from pydantic import BaseModel, EmailStr, Field, validator, root_validator
 from typing import Optional, List
+<<<<<<< HEAD
 from datetime import datetime
+=======
+>>>>>>> 8b414f2 (Fix: Recreate user_schemas.py with role and email validation)
 from enum import Enum
 import uuid
 import re
@@ -24,21 +27,33 @@ class UserBase(BaseModel):
     last_name: Optional[str] = Field(None, example="Doe")
     bio: Optional[str] = Field(None, example="Experienced software developer specializing in web applications.")
     profile_picture_url: Optional[str] = Field(None, example="https://example.com/profiles/john.jpg")
+<<<<<<< HEAD
     linkedin_profile_url: Optional[str] =Field(None, example="https://linkedin.com/in/johndoe")
+=======
+    linkedin_profile_url: Optional[str] = Field(None, example="https://linkedin.com/in/johndoe")
+>>>>>>> 8b414f2 (Fix: Recreate user_schemas.py with role and email validation)
     github_profile_url: Optional[str] = Field(None, example="https://github.com/johndoe")
     role: UserRole
 
     _validate_urls = validator('profile_picture_url', 'linkedin_profile_url', 'github_profile_url', pre=True, allow_reuse=True)(validate_url)
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> 8b414f2 (Fix: Recreate user_schemas.py with role and email validation)
     class Config:
         from_attributes = True
 
 class UserCreate(UserBase):
+<<<<<<< HEAD
     email: EmailStr = Field(..., example="john.doe@example.com")
+=======
+>>>>>>> 8b414f2 (Fix: Recreate user_schemas.py with role and email validation)
     password: str = Field(..., example="Secure*1234")
 
 class UserUpdate(UserBase):
     email: Optional[EmailStr] = Field(None, example="john.doe@example.com")
+<<<<<<< HEAD
     nickname: Optional[str] = Field(None, min_length=3, pattern=r'^[\w-]+$', example="john_doe123")
     first_name: Optional[str] = Field(None, example="John")
     last_name: Optional[str] = Field(None, example="Doe")
@@ -46,6 +61,8 @@ class UserUpdate(UserBase):
     profile_picture_url: Optional[str] = Field(None, example="https://example.com/profiles/john.jpg")
     linkedin_profile_url: Optional[str] =Field(None, example="https://linkedin.com/in/johndoe")
     github_profile_url: Optional[str] = Field(None, example="https://github.com/johndoe")
+=======
+>>>>>>> 8b414f2 (Fix: Recreate user_schemas.py with role and email validation)
     role: Optional[str] = Field(None, example="AUTHENTICATED")
 
     @root_validator(pre=True)
@@ -56,6 +73,7 @@ class UserUpdate(UserBase):
 
 class UserResponse(UserBase):
     id: uuid.UUID = Field(..., example=uuid.uuid4())
+<<<<<<< HEAD
     email: EmailStr = Field(..., example="john.doe@example.com")
     nickname: Optional[str] = Field(None, min_length=3, pattern=r'^[\w-]+$', example=generate_nickname())    
     is_professional: Optional[bool] = Field(default=False, example=True)
@@ -81,3 +99,11 @@ class UserListResponse(BaseModel):
     total: int = Field(..., example=100)
     page: int = Field(..., example=1)
     size: int = Field(..., example=10)
+=======
+    is_professional: Optional[bool] = Field(default=False, example=True)
+
+class LoginRequest(BaseModel):
+    email: EmailStr = Field(..., example="john.doe@example.com")
+    password: str = Field(..., example="Secure*1234")
+
+>>>>>>> 8b414f2 (Fix: Recreate user_schemas.py with role and email validation)
