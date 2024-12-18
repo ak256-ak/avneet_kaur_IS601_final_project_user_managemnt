@@ -1,5 +1,27 @@
 
 
+
+User Management System
+
+Overview 
+The Project is a user managemnet system in Python usng FastAPI.
+
+- git clone 
+
+docker compose up --build
+
+docker compose exec fastapi alembic upgrade head
+
+Running Tests
+
+- docker compose exec fastapi pytest tests/test_schemas/test_user_schemas.py
+
+
+
+
+---------------------------------------------------------------------------------
+
+
 # The User Management System Final Project: Your Epic Coding Adventure Awaits! 🎉✨🔥
 
 ## Introduction: Buckle Up for the Ride of a Lifetime 🚀🎬
