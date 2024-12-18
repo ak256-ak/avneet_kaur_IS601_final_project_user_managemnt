@@ -1,22 +1,51 @@
 
 
+# User Management System
 
-User Management System
+This project is a FastAPI-based user management system designed to handle user registration, authentication, and profile management. It includes robust validation for user input, modular code structure, and Dockerized deployment. This project is part of a Software Engineering assignment and includes meaningful extensions to the provided base code.
 
-Overview 
-The Project is a user managemnet system in Python usng FastAPI.
+## Features
 
-- git clone 
+-  User Registration and Authentication**:
+  - Handles user registration with email and password.
+  - Supports role-based access control.
 
-docker compose up --build
+- **Schema Validations**:
+  - Email validation using `EmailStr`.
+  - Role validation with `UserRole` enum.
+  - Field-level validation for optional and required fields.
 
-docker compose exec fastapi alembic upgrade head
+- **Error Handling**:
+  - Catch and raise validation errors for invalid inputs.
+  - Provides meaningful error messages for invalid email formats and roles.
 
-Running Tests
+- **Testing**:
+  - Includes 10 meaningful test cases for user schemas (e.g., `UserCreate` and `LoginRequest`).
+  - Covers edge cases for validation.
 
-- docker compose exec fastapi pytest tests/test_schemas/test_user_schemas.py
+- **Dockerized Deployment**:
+  - Fully containerized for easy deployment using Docker 
 
 
+## Setup Instructions 
+
+git clone https://github.com/ak256-ak/avneet_kaur_IS601_final_project_user_managemnt.git
+  cd:avneet_kaur_IS601_final_project_user_managemnt
+
+  - docker compose up --build
+
+- docker compose exec fastapi alembic upgrade head
+
+- FastAPI: http://localhost:8000
+
+# Contribution 
+- email verfication 
+
+
+**Test Cases**:
+  - Added 10 meaningful test cases for validation and edge cases.
+  - Covered inputs for `UserCreate` and `LoginRequest'
+  
 
 
 ---------------------------------------------------------------------------------
